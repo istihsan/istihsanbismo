@@ -73,8 +73,15 @@ export function Folio({ folio, figure }: FolioProps) {
       </div>
 
       <div className="confidential">
-        <ReSetText as="h3" text={folio.confidentialityHeading} className="subhead" />
-        <ReSetText as="p" text={folio.confidentiality} className="prose" />
+        <p className="confidential__bars" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </p>
+        <div className="confidential__body">
+          <ReSetText as="h3" text={folio.confidentialityHeading} className="subhead" />
+          <ReSetText as="p" text={folio.confidentiality} className="prose" />
+        </div>
       </div>
     </article>
   );

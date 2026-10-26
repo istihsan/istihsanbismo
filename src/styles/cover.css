@@ -9,9 +9,10 @@
   }
 
   .cover__name {
-    font-size: min(4.25rem, 16.5cqi);
+    max-width: 100%;
+    font-size: min(4.25rem, 18cqi);
     font-weight: 650;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.04em;
     line-height: 0.92;
   }
 
@@ -19,20 +20,146 @@
     display: block;
   }
 
+  .cover__mast {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .cover__nameblock {
+    min-width: 0;
+    container-type: inline-size;
+  }
+
   .cover__role {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     font-size: clamp(1.125rem, 0.95rem + 0.8vw, 1.625rem);
     font-weight: 500;
     letter-spacing: -0.01em;
   }
 
   .cover__statement {
-    max-width: 54ch;
+    max-width: 62ch;
     margin-top: 1.5rem;
-    padding: 0.125rem 0 0.125rem 1.125rem;
-    border-left: 2px solid var(--color-oxblood);
     font-size: var(--text-lead);
     line-height: 1.5;
+  }
+
+  .cover__open {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.625rem;
+    margin-top: 1.25rem;
+    font-size: var(--text-lead);
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    text-decoration: underline;
+    text-decoration-color: var(--color-oxblood);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.28em;
+  }
+
+  .cover__open:hover {
+    color: var(--color-oxblood);
+  }
+
+  .portrait {
+    display: flex;
+    width: min(9rem, 46%);
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: flex-end;
+    gap: 0.4rem;
+  }
+
+  .portrait__plate {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: var(--paper-inset);
+    box-shadow: inset 0 0 0 1px var(--color-edge);
+  }
+
+  .portrait__plate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) left 0.45rem top 0.45rem / 0.55rem 1px no-repeat,
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) left 0.45rem top 0.45rem / 1px 0.55rem no-repeat,
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) right 0.45rem top 0.45rem / 0.55rem 1px no-repeat,
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) right 0.45rem top 0.45rem / 1px 0.55rem no-repeat,
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) left 0.45rem bottom 0.45rem / 0.55rem 1px no-repeat,
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) left 0.45rem bottom 0.45rem / 1px 0.55rem no-repeat,
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) right 0.45rem bottom 0.45rem / 0.55rem 1px no-repeat,
+      linear-gradient(var(--color-oxblood), var(--color-oxblood)) right 0.45rem bottom 0.45rem / 1px 0.55rem no-repeat;
+  }
+
+  .portrait__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .portrait__caption {
+    color: var(--color-ink-muted);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .portrait__stamp {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0.35rem;
+    padding: 0.2rem 0.35rem;
+    transform: rotate(-8deg) translateY(-45%);
+    border: 1px solid var(--color-oxblood);
+    background: var(--paper);
+    color: var(--color-oxblood);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .portrait__stamp {
+      animation: dossier-stamp var(--duration-sheet) var(--ease-out) both;
+    }
+
+    .cover__open .arrow {
+      transition: transform var(--duration-dossier) var(--ease-out);
+    }
+
+    .cover__open:hover .arrow {
+      transform: translateX(3px);
+    }
+  }
+
+  @keyframes dossier-stamp {
+    from {
+      opacity: 0;
+      filter: blur(1.5px);
+      transform: rotate(-8deg) translateY(-45%) scale(1.04);
+    }
+
+    to {
+      opacity: 1;
+      filter: none;
+      transform: rotate(-8deg) translateY(-45%) scale(1);
+    }
   }
 
   /* Contents. */
@@ -89,7 +216,28 @@
     color: var(--color-oxblood);
   }
 
+  @media (min-width: 640px) {
+    .cover__mast {
+      flex-direction: row;
+      align-items: flex-end;
+      gap: clamp(1.25rem, 3cqi, 2rem);
+    }
+
+    .cover__nameblock {
+      flex: 1;
+    }
+
+    .portrait {
+      width: 9rem;
+      flex-shrink: 0;
+    }
+  }
+
   @media (min-width: 1024px) {
+    .portrait {
+      width: 11rem;
+    }
+
     .cover {
       grid-template-areas:
         "identity window"
@@ -114,7 +262,7 @@
     }
 
     .cover__name {
-      font-size: min(7rem, 9.6cqi, 10vh + 1.25rem);
+      font-size: min(6.5rem, 13.2cqi, 10vh + 1.25rem);
     }
   }
 
@@ -125,15 +273,27 @@
     }
 
     .cover__name {
-      font-size: min(7rem, 9.6cqi, 9vh + 1rem);
+      font-size: min(5.75rem, 13.2cqi, 9vh + 1rem);
+    }
+
+    .cover__mast {
+      gap: 1rem;
+    }
+
+    .portrait {
+      width: 7.25rem;
     }
 
     .cover__role {
-      margin-top: 0.625rem;
+      margin-top: 0.5rem;
     }
 
     .cover__statement {
       margin-top: 1rem;
+    }
+
+    .cover__open {
+      margin-top: 0.75rem;
     }
 
     .dossier-index__link {

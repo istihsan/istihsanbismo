@@ -8,7 +8,8 @@ export const en: PageCopy = {
   name: "Istihsan Bismoputro",
   title: "Frontend Engineer",
   dossier: {
-    label: "Professional dossier",
+    label: "Personnel file",
+    fileId: "IB–01",
     spineLabel: "Dossier",
     navLabel: "Dossier sheets",
     pagerLabel: "Sheet navigation",
@@ -20,7 +21,7 @@ export const en: PageCopy = {
   segments: {
     cover: { label: "Cover", short: "Cover", summary: "Name, role, contents" },
     work: {
-      label: "Selected work",
+      label: "Case index",
       short: "Work",
       summary: "Transjakarta App Dashboard",
     },
@@ -40,27 +41,27 @@ export const en: PageCopy = {
       summary: "Coming soon",
     },
     engineering: {
-      label: "Engineering notes",
+      label: "Annotated notes",
       short: "Engineering",
       summary: "How I structure data-heavy frontends",
     },
     experience: {
-      label: "Experience",
+      label: "Assignment record",
       short: "Experience",
       summary: "PT Transportasi Jakarta",
     },
     education: {
-      label: "Education",
+      label: "Academic record",
       short: "Education",
       summary: "Brawijaya University, S.Kom",
     },
     skills: {
-      label: "Technical index",
+      label: "Capability index",
       short: "Skills",
       summary: "TypeScript, React, TanStack Query",
     },
     contact: {
-      label: "Closing pocket",
+      label: "Correspondence",
       short: "Contact",
       summary: "Email and LinkedIn",
     },
@@ -72,10 +73,13 @@ export const en: PageCopy = {
   },
   cover: {
     statement:
-      "I build the frontend of data-heavy operational interfaces: modular React and TypeScript, role-based views, and tables staff can act on.",
-    indexLabel: "Contents",
+      "This file documents the frontend of data-heavy operational interfaces: modular React and TypeScript, role-based views, and tables staff can act on.",
+    indexLabel: "File index",
     windowCaption:
       "Featured: Transjakarta App Dashboard. An illustrative sketch of where it sits, not the actual interface.",
+    openFile: "Open the file",
+    portraitLabel: "Portrait",
+    accessMark: "Restricted",
   },
   folio: {
     caseTitle: "Transjakarta App Dashboard",
@@ -164,10 +168,10 @@ export const en: PageCopy = {
   ...enWork,
   ...enVita,
   contact: {
-    heading: "Get in touch",
+    heading: "Correspondence",
     closing:
       "Questions about this file, or the work behind it, are welcome by email or LinkedIn.",
-    summaryLabel: "This dossier in brief",
+    summaryLabel: "File summary",
     summary: [
       { label: "Role", value: "Frontend Engineer" },
       { label: "Focus", value: "Data-heavy admin interfaces" },

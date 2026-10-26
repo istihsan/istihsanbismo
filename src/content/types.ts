@@ -36,6 +36,7 @@ export type PageCopy = {
   title: string;
   dossier: {
     label: string;
+    fileId: string;
     spineLabel: string;
     navLabel: string;
     pagerLabel: string;
@@ -49,6 +50,9 @@ export type PageCopy = {
     statement: string;
     indexLabel: string;
     windowCaption: string;
+    openFile: string;
+    portraitLabel: string;
+    accessMark: string;
   };
   folio: {
     caseTitle: string;
@@ -103,6 +107,7 @@ export type PageCopy = {
     states: Entry[];
   };
   work: {
+    exhibit: string;
     transjakarta: WorkCardCopy;
     mern: WorkCardCopy;
     tycoon: {

@@ -2,13 +2,13 @@ import type { PageCopy } from "./types.ts";
 
 export const enVita: Pick<PageCopy, "experience" | "education" | "skills" | "missing"> = {
   experience: {
-    title: "Experience",
+    title: "Assignment record",
     org: "PT Transportasi Jakarta",
     role: "Frontend Engineer",
     dates: "May 2025–present",
   },
   education: {
-    title: "Education",
+    title: "Academic record",
     items: [
       {
         title: "Brawijaya University",
@@ -25,7 +25,7 @@ export const enVita: Pick<PageCopy, "experience" | "education" | "skills" | "mis
     ],
   },
   skills: {
-    title: "Technical index",
+    title: "Capability index",
     groups: [
       { label: "Languages", items: "TypeScript" },
       { label: "Frontend", items: "React, TanStack Query" },

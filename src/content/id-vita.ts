@@ -2,13 +2,13 @@ import type { PageCopy } from "./types.ts";
 
 export const idVita: Pick<PageCopy, "experience" | "education" | "skills" | "missing"> = {
   experience: {
-    title: "Pengalaman",
+    title: "Riwayat penugasan",
     org: "PT Transportasi Jakarta",
     role: "Frontend Engineer",
     dates: "Mei 2025–sekarang",
   },
   education: {
-    title: "Pendidikan",
+    title: "Riwayat akademik",
     items: [
       {
         title: "Universitas Brawijaya",
@@ -25,7 +25,7 @@ export const idVita: Pick<PageCopy, "experience" | "education" | "skills" | "mis
     ],
   },
   skills: {
-    title: "Indeks teknis",
+    title: "Indeks kemampuan",
     groups: [
       { label: "Bahasa", items: "TypeScript" },
       { label: "Frontend", items: "React, TanStack Query" },

@@ -10,6 +10,8 @@ type PublishedCardProps = {
   language: Language;
   routeId: Exclude<WorkDestination, "tycoon-game">;
   card: WorkCardCopy;
+  exhibitLabel: string;
+  exhibitNo: string;
   comingSoon?: never;
 };
 
@@ -17,6 +19,8 @@ type ComingSoonCardProps = {
   language: Language;
   routeId: "tycoon-game";
   card?: never;
+  exhibitLabel: string;
+  exhibitNo: string;
   comingSoon: PageCopy["work"]["tycoon"];
 };
 
@@ -24,18 +28,20 @@ type WorkCardProps = PublishedCardProps | ComingSoonCardProps;
 
 export function WorkCard(props: WorkCardProps) {
   const to = pathFor(props.language, props.routeId);
+  const exhibit = `${props.exhibitLabel} ${props.exhibitNo}`;
 
   if (props.comingSoon) {
     return (
       <Link to={to} className="work-card work-card--soon">
-        <span className="work-card__thumb" aria-hidden="true" />
         <span className="work-card__body">
-          <ReSetText text={props.comingSoon.stamp} className="work-card__stamp" />
           <ReSetText text={props.comingSoon.title} className="work-card__title" />
-          <ReSetText
-            text={props.comingSoon.description}
-            className="work-card__copy"
-          />
+          <ReSetText text={props.comingSoon.description} className="work-card__copy" />
+          <span className="work-card__foot">
+            <ReSetText text={exhibit} className="work-card__exhibit" />
+          </span>
+        </span>
+        <span className="work-card__thumb">
+          <ReSetText text={props.comingSoon.stamp} className="work-card__stamp" />
         </span>
       </Link>
     );
@@ -44,13 +50,16 @@ export function WorkCard(props: WorkCardProps) {
   return (
     <Link to={to} className="work-card">
       <span className="work-card__body">
-        <ReSetText text={props.card.note} className="work-card__note" />
         <ReSetText text={props.card.title} className="work-card__title" />
         <ReSetText text={props.card.kind} className="work-card__copy" />
         {props.card.role ? (
           <ReSetText text={props.card.role} className="work-card__meta" />
         ) : null}
         <ReSetText text={props.card.stack} className="work-card__meta" />
+        <span className="work-card__foot">
+          <ReSetText text={exhibit} className="work-card__exhibit" />
+          <ReSetText text={props.card.note} className="work-card__note" />
+        </span>
       </span>
     </Link>
   );

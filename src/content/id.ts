@@ -8,7 +8,8 @@ export const id: PageCopy = {
   name: "Istihsan Bismoputro",
   title: "Frontend Engineer",
   dossier: {
-    label: "Berkas profesional",
+    label: "Berkas personel",
+    fileId: "IB–01",
     spineLabel: "Berkas",
     navLabel: "Lembar berkas",
     pagerLabel: "Navigasi lembar",
@@ -20,7 +21,7 @@ export const id: PageCopy = {
   segments: {
     cover: { label: "Sampul", short: "Sampul", summary: "Nama, peran, isi" },
     work: {
-      label: "Karya pilihan",
+      label: "Indeks karya",
       short: "Karya",
       summary: "Dashboard Aplikasi\u00A0Transjakarta",
     },
@@ -40,27 +41,27 @@ export const id: PageCopy = {
       summary: "Segera hadir",
     },
     engineering: {
-      label: "Catatan engineering",
+      label: "Catatan beranotasi",
       short: "Engineering",
       summary: "Cara saya menyusun frontend yang padat data",
     },
     experience: {
-      label: "Pengalaman",
+      label: "Riwayat penugasan",
       short: "Pengalaman",
       summary: "PT Transportasi Jakarta",
     },
     education: {
-      label: "Pendidikan",
+      label: "Riwayat akademik",
       short: "Pendidikan",
       summary: "Universitas Brawijaya, S.Kom",
     },
     skills: {
-      label: "Indeks teknis",
+      label: "Indeks kemampuan",
       short: "Keahlian",
       summary: "TypeScript, React, TanStack Query",
     },
     contact: {
-      label: "Kantong penutup",
+      label: "Korespondensi",
       short: "Kontak",
       summary: "Email dan LinkedIn",
     },
@@ -72,10 +73,13 @@ export const id: PageCopy = {
   },
   cover: {
     statement:
-      "Saya membangun frontend untuk antarmuka operasional yang padat data: React dan TypeScript yang modular, tampilan role-based, dan tabel yang bisa langsung ditindaklanjuti staf.",
-    indexLabel: "Isi berkas",
+      "Berkas ini mendokumentasikan frontend untuk antarmuka operasional yang padat data: React dan TypeScript yang modular, tampilan role-based, dan tabel yang bisa langsung ditindaklanjuti staf.",
+    indexLabel: "Indeks berkas",
     windowCaption:
       "Unggulan: Dashboard Aplikasi\u00A0Transjakarta. Sketsa ilustratif tentang posisinya, bukan tampilan asli.",
+    openFile: "Buka berkas",
+    portraitLabel: "Potret",
+    accessMark: "Terbatas",
   },
   folio: {
     caseTitle: "Dashboard Aplikasi\u00A0Transjakarta",
@@ -164,7 +168,7 @@ export const id: PageCopy = {
   ...idWork,
   ...idVita,
   contact: {
-    heading: "Hubungi saya",
+    heading: "Korespondensi",
     closing:
       "Pertanyaan tentang berkas ini atau pekerjaan di baliknya bisa dikirim lewat email atau LinkedIn.",
     summaryLabel: "Ringkasan berkas",

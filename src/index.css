@@ -54,6 +54,7 @@
   --duration-dossier: 160ms;
   --duration-sheet: 560ms;
   --duration-re-set: 560ms;
+  --duration-pulse: 2.8s;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --sheet-turn: 0;
   --sheet-dir: 1;
@@ -145,7 +146,20 @@
 
 html {
   color-scheme: dark;
-  scrollbar-color: var(--color-edge) var(--desk);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Hidden bars, stable from first paint, so removing the gutter never shifts layout. */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
 }
 
 @media print {

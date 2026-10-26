@@ -180,7 +180,7 @@ function DossierChrome({
             copy={copy}
             head={
               id === "cover"
-                ? { label: copy.dossier.label, docRef: copy.title }
+                ? { label: copy.dossier.label, docRef: copy.dossier.fileId }
                 : undefined
             }
             after={id === "contact" ? <Pocket copy={copy} /> : undefined}

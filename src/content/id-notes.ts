@@ -2,7 +2,7 @@ import type { PageCopy } from "./types.ts";
 
 export const idNotes: PageCopy["notes"] = {
   title: "Cara saya menyusun frontend yang padat data",
-  lead: "Catatan tentang cara saya menangani antarmuka admin yang padat data dan berbasis peran. Isinya cara kerja saya secara umum, bukan detail internal produk tertentu.",
+  lead: "Catatan beranotasi tentang cara saya menangani antarmuka admin yang padat data dan berbasis peran. Isinya cara kerja saya secara umum, bukan detail internal produk tertentu.",
   sections: {
     featureArchitecture: "Arsitektur berbasis fitur",
     serverState: "Server state",

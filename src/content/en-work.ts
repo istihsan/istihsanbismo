@@ -2,6 +2,7 @@ import type { PageCopy } from "./types.ts";
 
 export const enWork: Pick<PageCopy, "work" | "mern" | "tycoon"> = {
   work: {
+    exhibit: "Exhibit",
     transjakarta: {
       title: "Transjakarta App Dashboard",
       kind: "Enterprise operations dashboard",

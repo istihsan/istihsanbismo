@@ -20,8 +20,20 @@
     .folio__title::after,
     .mini__layer,
     .wire__row,
-    .wire__line {
+    .wire__line,
+    .confidential__bars span {
       background: CanvasText;
+    }
+
+    .portrait__plate,
+    .portrait__stamp,
+    .portrait__caption {
+      border: 1px solid CanvasText;
+      background-image: none;
+    }
+
+    .portrait__plate::after {
+      content: none;
     }
 
     .folder.is-re-set .sheet--active .sheet__head,
@@ -78,6 +90,11 @@
 
     .sheet {
       display: none;
+    }
+
+    .sheet__face {
+      background-image: none;
+      box-shadow: none;
     }
 
     .sheet--active {

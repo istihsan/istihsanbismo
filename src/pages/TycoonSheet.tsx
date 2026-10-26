@@ -11,9 +11,9 @@ export function TycoonSheet({ copy }: TycoonSheetProps) {
 
   return (
     <article className="vita tycoon-sheet">
-      <div className="tycoon-sheet__seal" aria-hidden="true">
-        <span className="tycoon-sheet__thumb" />
-        <span className="work-card__stamp">{tycoon.stamp}</span>
+      <div className="tycoon-sheet__seal">
+        <span className="tycoon-sheet__thumb" aria-hidden="true" />
+        <ReSetText text={tycoon.stamp} className="work-card__stamp" />
       </div>
       <ReSetText
         as="h2"

@@ -2,7 +2,7 @@ import type { PageCopy } from "./types.ts";
 
 export const enNotes: PageCopy["notes"] = {
   title: "How I structure data-heavy frontends",
-  lead: "Notes on how I approach data-heavy, role-based admin interfaces. They describe my general way of working, not the internals of a specific product.",
+  lead: "Annotated notes on how I approach data-heavy, role-based admin interfaces. They describe my general way of working, not the internals of a specific product.",
   sections: {
     featureArchitecture: "Feature-driven architecture",
     serverState: "Server state",

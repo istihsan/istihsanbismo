@@ -25,6 +25,8 @@ export function WorkIndex({ copy, language }: WorkIndexProps) {
             language={language}
             routeId="transjakarta"
             card={copy.work.transjakarta}
+            exhibitLabel={copy.work.exhibit}
+            exhibitNo="01"
           />
         </li>
         <li>
@@ -32,6 +34,8 @@ export function WorkIndex({ copy, language }: WorkIndexProps) {
             language={language}
             routeId="mern-website"
             card={copy.work.mern}
+            exhibitLabel={copy.work.exhibit}
+            exhibitNo="02"
           />
         </li>
         <li>
@@ -39,6 +43,8 @@ export function WorkIndex({ copy, language }: WorkIndexProps) {
             language={language}
             routeId="tycoon-game"
             comingSoon={copy.work.tycoon}
+            exhibitLabel={copy.work.exhibit}
+            exhibitNo="03"
           />
         </li>
       </ul>

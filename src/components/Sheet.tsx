@@ -99,7 +99,13 @@ export function Sheet({
             )}
           </div>
           <div className="sheet__body">{children}</div>
-          <SheetPager copy={copy} routeId={routeId} language={language} />
+          <SheetPager
+            copy={copy}
+            routeId={routeId}
+            language={language}
+            active={active}
+            turning={turning}
+          />
           {after}
         </div>
         <span className="sheet__shade" aria-hidden="true" />
