@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="title desc">
+  <title id="title">Bismoputro dossier monogram</title>
+  <desc id="desc">An ivory geometric letter B with a muted oxblood folded-paper corner on a charcoal background.</desc>
+  <path fill="#EAE5DA" fill-rule="evenodd" d="
+    M222 172
+    H292
+    C340 172 375 204 375 248
+    C375 279 359 300 331 309
+    C365 316 390 344 390 379
+    C390 422 355 452 310 452
+    H168
+    V236
+    L222 270
+    V404
+    H305
+    C333 404 347 388 347 367
+    C347 346 332 338 307 338
+    H222
+    V296
+    H307
+    C332 296 347 281 347 258
+    C347 235 331 214 303 214
+    H222
+    Z"/>
+  <path fill="#78352B" d="M168 236 L222 172 V234 Z"/>
+</svg>

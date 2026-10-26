@@ -1,0 +1,311 @@
+@import "./styles/folder.css";
+@import "./styles/sheet.css";
+@import "./styles/cover.css";
+@import "./styles/window.css";
+@import "./styles/folio.css";
+@import "./styles/diagram.css";
+@import "./styles/notes.css";
+@import "./styles/work.css";
+@import "./styles/pocket.css";
+@import "./styles/media.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*! Copyright 2023 The Schibsted-Grotesk Project Authors (https://github.com/schibsted/schibsted-grotesk) */
+@font-face {
+  font-family: "Schibsted Grotesk";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/schibsted-grotesk-latin-wght.woff2") format("woff2");
+}
+
+/* Schibsted Grotesk is self-hosted as one Latin variable WOFF2
+   (wght 400–900) with font-display: swap. Text stays visible in the
+   Arial / Helvetica Neue / Helvetica / ui-sans-serif / system-ui /
+   sans-serif stack until that face arrives. size-adjust is omitted:
+   measured Arial fallback width vs Schibsted is about 104–108% at
+   400–500 and about 99–100% at 600, so one override does not fit. */
+:root {
+  /* Materials. */
+  --desk: #0a0908;
+  --charcoal: #161311;
+  --charcoal-deep: #0f0d0b;
+  --paper: #ece6dc;
+  --paper-inset: #e4ddd1;
+  --paper-shade: #d9d0c2;
+  --paper-back: #c9bfb0;
+  --oxblood-edge: #7d2a22;
+  --shadow-sheet: drop-shadow(0 18px 22px rgb(0 0 0 / 0.42))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.4));
+  --stack-nudge: 0.5rem;
+  --corner: 1.25rem;
+  --sheet-clip: polygon(
+    0 0,
+    calc(100% - var(--corner)) 0,
+    100% var(--corner),
+    100% 100%,
+    0 100%
+  );
+
+  /* Motion. */
+  --duration-dossier: 160ms;
+  --duration-sheet: 560ms;
+  --duration-re-set: 560ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --sheet-turn: 0;
+  --sheet-dir: 1;
+
+  /* Type. */
+  --text-title: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
+  --text-lead: 1.125rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-label: 0.75rem;
+
+  /* Space. */
+  --sheet-pad-x: 1.25rem;
+  --sheet-pad-y: 1.25rem;
+  --space-block: 2.5rem;
+
+  /* Surface colors; .on-paper and .on-dark set them per surface. */
+  --color-ink: #efe9e0;
+  --color-ink-muted: #a89f94;
+  --color-oxblood: #e39a8b;
+  --color-edge: #36312c;
+  --color-edge-strong: #7c7167;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --corner: 1.75rem;
+    --sheet-pad-x: 2rem;
+    --sheet-pad-y: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --corner: 2.25rem;
+    --sheet-pad-x: clamp(2.5rem, 3.5vw, 3.5rem);
+    --sheet-pad-y: 1.75rem;
+    --text-lead: 1.1875rem;
+    --text-body: 1.0625rem;
+    --space-block: 3.5rem;
+  }
+}
+
+/* Light text on charcoal: ink 15.3:1, muted 7.1:1, oxblood 8.2:1. */
+.on-dark {
+  --color-ink: #efe9e0;
+  --color-ink-muted: #a89f94;
+  --color-oxblood: #e39a8b;
+  --color-edge: #36312c;
+  --color-edge-strong: #7c7167;
+
+  color: var(--color-ink);
+  color-scheme: dark;
+}
+
+/* Dark ink on paper: ink 14.1:1, muted 5.9:1 (5.4:1 on the inset),
+   oxblood 7.6:1; meaningful strokes (edge-strong) 3.4:1. */
+.on-paper {
+  --color-ink: #1c1916;
+  --color-ink-muted: #5d554d;
+  --color-oxblood: #7d2a22;
+  --color-edge: #cbc1b2;
+  --color-edge-strong: #857a6d;
+
+  color: var(--color-ink);
+  color-scheme: light;
+}
+
+@media print {
+  :root {
+    --desk: #fff;
+    --charcoal: #fff;
+    --paper: #fff;
+    --paper-inset: #fff;
+    --oxblood-edge: #7d2a22;
+  }
+
+  .on-dark,
+  .on-paper {
+    --color-ink: #111;
+    --color-ink-muted: #444;
+    --color-oxblood: #7d2a22;
+    --color-edge: #bbb;
+    --color-edge-strong: #666;
+
+    color-scheme: light;
+  }
+}
+
+html {
+  color-scheme: dark;
+  scrollbar-color: var(--color-edge) var(--desk);
+}
+
+@media print {
+  html {
+    color-scheme: light;
+  }
+}
+
+body {
+  background: var(--desk);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-oxblood);
+  color: var(--paper);
+}
+
+.on-dark ::selection {
+  color: var(--charcoal);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+p,
+dd,
+li {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-oxblood);
+  outline-offset: 2px;
+}
+
+/* Headings take focus when their sheet opens; only keyboard focus shows a ring. */
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+@keyframes dossier-re-set {
+  from {
+    -webkit-mask-size: 0% 100%;
+    mask-size: 0% 100%;
+  }
+  to {
+    -webkit-mask-size: 130% 100%;
+    mask-size: 130% 100%;
+  }
+}
+
+@property --sheet-turn {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --sheet-dir {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.folder.is-re-set .sheet--active .sheet__head,
+.folder.is-re-set .sheet--active .sheet__body,
+.folder.is-re-set .sheet--active .pager,
+.folder.is-re-set .sheet--active .pocket__label,
+.folder.is-re-set .sheet--active .pocket-link,
+.folder.is-re-set .sheet--active .pocket__imprint,
+.folder.is-re-set .spine-tab__label,
+.folder.is-re-set .spine__mark {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 82%,
+    rgb(0 0 0 / 0.2) 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 82%,
+    rgb(0 0 0 / 0.2) 94%,
+    transparent 100%
+  );
+  -webkit-mask-size: 0% 100%;
+  mask-size: 0% 100%;
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: dossier-re-set var(--duration-re-set) cubic-bezier(0.45, 0.05, 0.2, 1)
+    both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Essential dossier text and the controls stay opaque. */
+  #root :where(h1, h2, h3, h4, p, span, dt, dd, li, a, button, figcaption, section):not(
+      .sheet__curl,
+      .sheet__shade
+    ) {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .dossier-re-set,
+  .folder.is-re-set .sheet--active .sheet__head,
+  .folder.is-re-set .sheet--active .sheet__body,
+  .folder.is-re-set .sheet--active .pager,
+  .folder.is-re-set .sheet--active .pocket__label,
+  .folder.is-re-set .sheet--active .pocket-link,
+  .folder.is-re-set .sheet--active .pocket__imprint,
+  .folder.is-re-set .spine-tab__label,
+  .folder.is-re-set .spine__mark,
+  .sheet--exiting,
+  .sheet__leaf,
+  .sheet__curl,
+  .sheet__verso,
+  .sheet__shade,
+  .sheet__spec,
+  .sheet__cast {
+    animation: none;
+    transition: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .sheet__curl,
+  .sheet__verso,
+  .sheet__shade,
+  .sheet__spec,
+  .sheet__cast,
+  .sheet-stack__guard {
+    display: none;
+  }
+
+  .sheet--exiting,
+  .sheet--exiting .sheet__leaf,
+  .sheet--active .sheet__leaf,
+  .sheet--ahead .sheet__leaf {
+    transform: none;
+    filter: none;
+    will-change: auto;
+  }
+
+  .sheet--exiting .sheet__face,
+  .sheet--exiting .sheet__shade,
+  .sheet--exiting .sheet__spec {
+    clip-path: var(--sheet-clip);
+  }
+}

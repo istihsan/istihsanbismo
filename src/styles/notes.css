@@ -1,0 +1,274 @@
+/* 03 Engineering notes: principles, the layered-frontend figure with
+   callouts, the decision ledger, and the table-state wireframes. */
+
+@layer components {
+  .notes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-block);
+  }
+
+  .notes__intro .prose {
+    margin-top: 1.25rem;
+  }
+
+  .notes__section {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  /* Fig. 2: layers. */
+  .layers__stack {
+    display: grid;
+    gap: 0.875rem;
+  }
+
+  .layer {
+    position: relative;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .layer + .layer::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 1.5rem;
+    height: 0.875rem;
+    border-left: 1px solid var(--color-edge-strong);
+  }
+
+  .layer__bar {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-ink);
+    background: var(--paper);
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .layer--boundary .layer__bar {
+    border-style: dashed;
+    border-color: var(--color-edge-strong);
+    background: transparent;
+    color: var(--color-ink-muted);
+  }
+
+  .layer__no {
+    color: var(--color-oxblood);
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .layer__note {
+    position: relative;
+    padding-left: 1.125rem;
+    border-left: 1px dashed var(--color-edge-strong);
+    margin-left: 1.5rem;
+    color: var(--color-ink-muted);
+    font-size: var(--text-small);
+    line-height: 1.5;
+  }
+
+  /* Decision ledger. */
+  .ledger {
+    counter-reset: decision;
+    border-bottom: 1px solid var(--color-edge);
+  }
+
+  .ledger__entry {
+    display: grid;
+    gap: 1rem;
+    padding-block: 1.25rem 1.5rem;
+    border-top: 1px solid var(--color-edge);
+    counter-increment: decision;
+  }
+
+  .ledger__entry:first-child {
+    border-top-color: var(--color-ink);
+  }
+
+  .ledger__title {
+    font-size: var(--text-body);
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .ledger__title::before {
+    content: "D" counter(decision);
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--color-oxblood);
+    font-size: var(--text-label);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .ledger__fields {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .ledger__field {
+    display: grid;
+    align-content: start;
+    gap: 0.25rem;
+  }
+
+  .ledger__field + .ledger__field dt::before {
+    content: "→ ";
+    content: "→ " / "";
+    color: var(--color-oxblood);
+  }
+
+  .ledger__text {
+    font-size: var(--text-small);
+    line-height: 1.55;
+  }
+
+  .ledger__field--trade-off .ledger__text {
+    color: var(--color-ink-muted);
+  }
+
+  /* Fig. 3: table states. */
+  .states__list {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .state__name {
+    margin-top: 0.75rem;
+    font-size: var(--text-small);
+    font-weight: 650;
+  }
+
+  .state__note {
+    color: var(--color-ink-muted);
+    font-size: var(--text-small);
+    line-height: 1.5;
+  }
+
+  .wire {
+    display: flex;
+    height: 7.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.625rem;
+    border: 1px solid var(--color-edge-strong);
+    background: var(--paper-inset);
+  }
+
+  .wire__head {
+    height: 0.625rem;
+    border-bottom: 1px solid var(--color-edge-strong);
+  }
+
+  .wire__row {
+    height: 0.5rem;
+    background: var(--color-edge);
+  }
+
+  .wire__row:nth-child(3) {
+    width: 82%;
+  }
+
+  .wire__row:nth-child(4) {
+    width: 64%;
+  }
+
+  .wire__message {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+  }
+
+  .wire__line {
+    width: 58%;
+    height: 0.375rem;
+    background: var(--color-edge-strong);
+  }
+
+  .wire__line--short {
+    width: 36%;
+    background: var(--color-edge);
+  }
+
+  .wire--error .wire__line:first-child {
+    background: var(--color-oxblood);
+  }
+
+  .wire__button {
+    width: 3.5rem;
+    height: 0.875rem;
+    margin-top: 0.25rem;
+    border: 1px solid var(--color-ink);
+  }
+
+  @media (min-width: 640px) {
+    .states__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .principles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .layer {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      column-gap: 3.5rem;
+    }
+
+    .layer__note {
+      margin-left: 0;
+      padding-left: 0.875rem;
+      border-left: 0;
+    }
+
+    /* Leader from the layer to its callout. */
+    .layer__note::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      width: 3rem;
+      border-top: 1px dashed var(--color-edge-strong);
+    }
+
+    .layer__note::after {
+      content: "";
+      position: absolute;
+      top: calc(50% - 2px);
+      left: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-oxblood);
+    }
+
+    .ledger__fields {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 1.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ledger__entry {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 10fr);
+      column-gap: 2rem;
+    }
+
+    .layers .plate {
+      padding: 1.75rem 2.5rem 2rem;
+    }
+  }
+}

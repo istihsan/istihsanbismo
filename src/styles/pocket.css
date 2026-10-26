@@ -1,0 +1,212 @@
+/* 04 Closing pocket: the closing line, then a dark angled pocket flush
+   with the bottom of the last sheet, an oxblood card tucked inside. */
+
+@layer components {
+  .closing {
+    display: grid;
+    gap: 2.5rem;
+    align-content: start;
+  }
+
+  @media (max-height: 640px) {
+    .closing {
+      gap: 1.25rem;
+    }
+  }
+
+  .closing__lede .prose {
+    margin-top: 1.25rem;
+  }
+
+  .closing .closing__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    .closing__facts .fact-list__row {
+      grid-template-columns: 8.5rem minmax(0, 1fr);
+      align-items: baseline;
+      column-gap: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .closing {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      column-gap: clamp(2.5rem, 6cqi, 5rem);
+    }
+  }
+
+  .pocket {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    margin-inline: calc(-1 * var(--sheet-pad-x));
+    padding: 4rem var(--sheet-pad-x) 1.25rem;
+  }
+
+  /* Card tucked into the pocket. */
+  .pocket::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    top: -0.75rem;
+    right: 9%;
+    width: min(13rem, 38%);
+    height: 3.5rem;
+    border: 1px solid transparent;
+    background: var(--oxblood-edge);
+    transform: rotate(-3deg);
+  }
+
+  /* The flap. */
+  .pocket::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-top: 1px solid transparent;
+    background: var(--charcoal);
+    clip-path: polygon(0 1.5rem, 62% 0, 100% 1.125rem, 100% 100%, 0 100%);
+  }
+
+  .pocket__label {
+    margin-bottom: 0.5rem;
+  }
+
+  .pocket__links {
+    border-top: 1px solid var(--color-edge);
+  }
+
+  .pocket-link {
+    display: grid;
+    min-height: 3.5rem;
+    grid-template-areas:
+      "label mark"
+      "value mark";
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 1rem;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid var(--color-edge);
+  }
+
+  .pocket-link__label {
+    grid-area: label;
+    color: var(--color-ink-muted);
+    font-size: var(--text-label);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pocket-link__value {
+    grid-area: value;
+    font-size: var(--text-body);
+    font-weight: 550;
+    overflow-wrap: anywhere;
+    transition: color var(--duration-dossier) ease-out;
+  }
+
+  .pocket-link__mark {
+    grid-area: mark;
+    color: var(--color-oxblood);
+    transition: transform var(--duration-dossier) ease-out;
+  }
+
+  .pocket-link:hover .pocket-link__value {
+    color: var(--color-oxblood);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pocket-link:hover .pocket-link__mark {
+      transform: translateX(3px);
+    }
+  }
+
+  .pocket__imprint {
+    margin-top: 1.5rem;
+    color: var(--color-ink-muted);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  @media (max-height: 720px) {
+    .pocket {
+      padding-top: 2.25rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .pocket-link {
+      min-height: 2.75rem;
+      padding-block: 0.5rem;
+    }
+
+    .pocket__imprint {
+      margin-top: 0.75rem;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .pocket {
+      padding-top: 5rem;
+    }
+
+    .pocket-link {
+      grid-template-areas: "label value mark";
+      grid-template-columns: 7rem minmax(0, 1fr) auto;
+    }
+
+    .pocket-link__value {
+      font-size: var(--text-lead);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pocket {
+      padding-top: 6rem;
+      padding-bottom: 1.75rem;
+    }
+
+    .pocket::after {
+      clip-path: polygon(0 2.5rem, 62% 0, 100% 2rem, 100% 100%, 0 100%);
+    }
+
+    .pocket__links,
+    .pocket__label {
+      max-width: 46rem;
+    }
+  }
+
+  @media (max-height: 640px) {
+    .pocket {
+      padding-top: 2.25rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .pocket__imprint {
+      display: none;
+    }
+
+    .pocket-link {
+      min-height: 2.75rem;
+      padding-block: 0.5rem;
+    }
+  }
+
+  @media (max-height: 520px) {
+    .pocket {
+      padding-top: 1.5rem;
+    }
+
+    .pocket::before {
+      height: 2.25rem;
+      top: -0.4rem;
+    }
+  }
+}

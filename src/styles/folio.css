@@ -1,0 +1,127 @@
+/* 02 Project folio: a two-column opening, the system-context figure,
+   complexity beside decisions, and the confidentiality note. */
+
+@layer components {
+  .folio {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-block);
+  }
+
+  .folio__opening {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .folio__title {
+    position: relative;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .folio__title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3.5rem;
+    height: 3px;
+    background: var(--oxblood-edge);
+  }
+
+  .folio__lede > .folio__block,
+  .folio__aside > .folio__block + .folio__block {
+    margin-top: 2rem;
+  }
+
+  .folio__lede > .folio__title + .folio__block {
+    margin-top: 0;
+  }
+
+  .folio__facts {
+    margin-top: 2rem;
+  }
+
+  .domain-list {
+    border-top: 1px solid var(--color-edge);
+  }
+
+  .domain-list__item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.625rem;
+    padding: 0.5rem 0 0.5rem 1.375rem;
+    position: relative;
+    border-bottom: 1px solid var(--color-edge);
+    font-size: var(--text-small);
+  }
+
+  .domain-list__item::before {
+    content: "";
+    position: absolute;
+    top: 0.95rem;
+    left: 0.125rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid var(--color-oxblood);
+  }
+
+  .domain-list__item--across::before {
+    border-style: dashed;
+    border-color: var(--color-edge-strong);
+    border-radius: 50%;
+  }
+
+  .domain-list__name {
+    font-weight: 600;
+  }
+
+  .domain-list__gloss {
+    color: var(--color-ink-muted);
+  }
+
+  .folio__pairs {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .confidential {
+    max-width: 44rem;
+    padding: 1rem 1.25rem 1.125rem;
+    border: 1px solid var(--color-edge);
+    border-left: 3px solid var(--oxblood-edge);
+    background: var(--paper-inset);
+  }
+
+  .confidential .subhead {
+    margin-bottom: 0.375rem;
+  }
+
+  .confidential .prose {
+    font-size: var(--text-small);
+  }
+
+  @media (min-width: 768px) {
+    .folio__pairs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .folio__opening {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      column-gap: 0;
+    }
+
+    .folio__lede {
+      padding-right: clamp(2rem, 4cqi, 3.5rem);
+    }
+
+    .folio__aside {
+      padding-left: clamp(2rem, 4cqi, 3.5rem);
+      border-left: 1px solid var(--color-edge);
+    }
+  }
+}

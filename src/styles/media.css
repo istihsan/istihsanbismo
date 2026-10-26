@@ -1,0 +1,130 @@
+/* Forced colors and print. Print shows the current sheet only, light,
+   with external link targets written out. */
+
+@layer components {
+  @media (forced-colors: active) {
+    .sheet__face::before,
+    .sheet__curl,
+    .sheet__verso,
+    .sheet__shade,
+    .sheet__spec,
+    .sheet__cast,
+    .sheet-stack::before,
+    .sheet-stack::after,
+    .pocket::before,
+    .window__frame::before {
+      display: none;
+    }
+
+    .spine-tab[aria-current]::after,
+    .folio__title::after,
+    .mini__layer,
+    .wire__row,
+    .wire__line {
+      background: CanvasText;
+    }
+
+    .folder.is-re-set .sheet--active .sheet__head,
+    .folder.is-re-set .sheet--active .sheet__body,
+    .folder.is-re-set .sheet--active .pager,
+    .folder.is-re-set .sheet--active .pocket__label,
+    .folder.is-re-set .sheet--active .pocket-link,
+    .folder.is-re-set .sheet--active .pocket__imprint,
+    .folder.is-re-set .spine-tab__label,
+    .folder.is-re-set .spine__mark {
+      animation: none;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+
+  @media print {
+    .desk,
+    .folder,
+    .stage {
+      display: block;
+      height: auto;
+      min-height: 0;
+      padding: 0;
+      border: 0;
+      background: none;
+      box-shadow: none;
+    }
+
+    .folder {
+      position: static;
+    }
+
+    .spine,
+    .pager,
+    .sheet__face::before,
+    .sheet__curl,
+    .sheet__verso,
+    .sheet__shade,
+    .sheet__spec,
+    .sheet__cast,
+    .sheet-stack__guard,
+    .sheet-stack::before,
+    .sheet-stack::after,
+    .pocket::before,
+    .window__frame::before {
+      display: none;
+    }
+
+    .sheet-stack {
+      display: block;
+      filter: none;
+    }
+
+    .sheet {
+      display: none;
+    }
+
+    .sheet--active {
+      position: static;
+      display: flex;
+      min-height: 0;
+      visibility: visible;
+      pointer-events: auto;
+      padding: 0;
+      background: none;
+      box-shadow: none;
+      clip-path: none;
+      transform: none;
+      animation: none;
+    }
+
+    .window__plate,
+    .pocket::after {
+      border: 1px solid var(--color-edge-strong);
+      background: none;
+      clip-path: none;
+      box-shadow: none;
+    }
+
+    .plate,
+    .confidential,
+    .wire {
+      background: none;
+    }
+
+    .diagram,
+    .layers,
+    .states,
+    .ledger__entry,
+    .window {
+      break-inside: avoid;
+    }
+
+    .pocket {
+      margin-inline: 0;
+      padding: 1rem;
+    }
+
+    .pocket-link[href^="http"]::after {
+      content: " (" attr(href) ")";
+      grid-column: 1 / -1;
+      font-size: var(--text-small);
+    }
+  }
+}
