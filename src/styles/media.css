@@ -12,7 +12,11 @@
     .sheet-stack::before,
     .sheet-stack::after,
     .pocket::before,
-    .window__frame::before {
+    .window__frame::before,
+    .opening,
+    .opening-skip,
+    .cover__replay,
+    .cover__redact {
       display: none;
     }
 
@@ -79,7 +83,11 @@
     .sheet-stack::before,
     .sheet-stack::after,
     .pocket::before,
-    .window__frame::before {
+    .window__frame::before,
+    .opening,
+    .opening-skip,
+    .cover__replay,
+    .cover__redact {
       display: none;
     }
 

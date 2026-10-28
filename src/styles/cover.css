@@ -9,11 +9,19 @@
   }
 
   .cover__name {
+    position: relative;
     max-width: 100%;
     font-size: min(4.25rem, 18cqi);
     font-weight: 650;
     letter-spacing: -0.04em;
     line-height: 0.92;
+  }
+
+  .cover__name-text {
+    position: relative;
+    display: block;
+    width: max-content;
+    max-width: 100%;
   }
 
   .cover__name-line {
@@ -33,6 +41,8 @@
   }
 
   .cover__role {
+    position: relative;
+    z-index: 1;
     margin-top: 0.75rem;
     font-size: clamp(1.125rem, 0.95rem + 0.8vw, 1.625rem);
     font-weight: 500;
@@ -66,6 +76,7 @@
   }
 
   .portrait {
+    position: relative;
     display: flex;
     width: min(9rem, 46%);
     flex-direction: column;
@@ -74,12 +85,20 @@
     gap: 0.4rem;
   }
 
+  .portrait__mount {
+    position: relative;
+    width: 100%;
+  }
+
   .portrait__plate {
     position: relative;
     width: 100%;
     aspect-ratio: 1;
-    background-color: var(--paper-inset);
-    box-shadow: inset 0 0 0 1px var(--color-edge);
+    overflow: hidden;
+    background-color: var(--paper-shade);
+    box-shadow:
+      inset 0 0 0 1px rgb(70 52 36 / 0.35),
+      3px 6px 14px -4px rgb(40 28 18 / 0.38);
   }
 
   .portrait__plate::after {
@@ -101,11 +120,13 @@
 
   .portrait__photo {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0.28rem;
+    width: calc(100% - 0.56rem);
+    height: calc(100% - 0.56rem);
     object-fit: cover;
-    object-position: center;
+    object-position: center 42%;
+    transform: scale(1.38);
+    transform-origin: center 42%;
   }
 
   .portrait__caption {
@@ -117,48 +138,40 @@
     text-transform: uppercase;
   }
 
+  .portrait__mark {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    pointer-events: none;
+  }
+
   .portrait__stamp {
     position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0.35rem;
-    padding: 0.2rem 0.35rem;
-    transform: rotate(-8deg) translateY(-45%);
-    border: 1px solid var(--color-oxblood);
+    top: -0.28rem;
+    right: 0.12rem;
+    padding: 0.16rem 0.38rem;
+    border: 1.5px solid var(--color-oxblood);
     background: var(--paper);
     color: var(--color-oxblood);
-    font-size: 0.625rem;
+    font-size: 0.6875rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     line-height: 1.2;
     text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    transform: rotate(-8deg);
+    transform-origin: 100% 0;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .portrait__stamp {
-      animation: dossier-stamp var(--duration-sheet) var(--ease-out) both;
-    }
-
     .cover__open .arrow {
       transition: transform var(--duration-dossier) var(--ease-out);
     }
 
     .cover__open:hover .arrow {
       transform: translateX(3px);
-    }
-  }
-
-  @keyframes dossier-stamp {
-    from {
-      opacity: 0;
-      filter: blur(1.5px);
-      transform: rotate(-8deg) translateY(-45%) scale(1.04);
-    }
-
-    to {
-      opacity: 1;
-      filter: none;
-      transform: rotate(-8deg) translateY(-45%) scale(1);
     }
   }
 
@@ -299,5 +312,49 @@
     .dossier-index__link {
       padding-block: 0.5rem;
     }
+  }
+
+  .cover__replay {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    margin-top: 0.35rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-ink-muted);
+    font: inherit;
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    cursor: pointer;
+  }
+
+  .cover__replay:hover {
+    color: var(--color-ink);
+  }
+
+  .cover__redact {
+    position: absolute;
+    z-index: 1;
+    inset: -0.16em -0.28em -0.12em;
+    display: block;
+    background: #141210;
+    pointer-events: none;
+    user-select: none;
+    --scratch: 0;
+    clip-path: polygon(
+      calc(var(--scratch) * 112% - 2%) -8%,
+      130% -8%,
+      130% 108%,
+      calc(var(--scratch) * 112% - 1%) 108%,
+      calc(var(--scratch) * 112% - 3.5%) 80%,
+      calc(var(--scratch) * 112% - 1.2%) 58%,
+      calc(var(--scratch) * 112% - 4%) 36%,
+      calc(var(--scratch) * 112% - 1.5%) 14%
+    );
   }
 }

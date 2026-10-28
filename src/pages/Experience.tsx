@@ -1,3 +1,4 @@
+import { Paperclip } from "../components/Paperclip.tsx";
 import { ReSetText } from "../components/ReSetText.tsx";
 import type { PageCopy } from "../content/index.ts";
 import { sheetHeadingId } from "../routes.ts";
@@ -18,7 +19,10 @@ export function Experience({ copy }: ExperienceProps) {
         text={experience.title}
         className="sheet-title"
       />
-      <div className="vita-row">
+      <div className="vita-row vita-row--clipped">
+        <span className="vita-row__clip" aria-hidden="true">
+          <Paperclip />
+        </span>
         <ReSetText as="h3" text={experience.role} className="vita-row__title" />
         <ReSetText as="p" text={experience.org} className="vita-row__meta" />
         <ReSetText as="p" text={experience.dates} className="vita-row__meta" />

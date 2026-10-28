@@ -1,5 +1,5 @@
 /** Matches `--duration-sheet`. Instant under reduced motion. */
-export const SHEET_TURN_MS = 560;
+export const SHEET_TURN_MS = 900;
 
 type Turn = {
   frame: number;

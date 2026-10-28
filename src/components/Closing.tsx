@@ -1,6 +1,7 @@
 import type { PageCopy } from "../content/index.ts";
 import { sheetHeadingId } from "../routes.ts";
 import { FactList } from "./FactList.tsx";
+import { Paperclip } from "./Paperclip.tsx";
 import { ReSetText } from "./ReSetText.tsx";
 
 type ClosingProps = {
@@ -22,7 +23,12 @@ export function Closing({ contact }: ClosingProps) {
       </div>
       <div className="closing__summary">
         <ReSetText as="h3" text={contact.summaryLabel} className="subhead" />
-        <FactList facts={contact.summary} className="closing__facts" />
+        <div className="closing__facts-wrap">
+          <span className="closing__clip" aria-hidden="true">
+            <Paperclip />
+          </span>
+          <FactList facts={contact.summary} className="closing__facts" />
+        </div>
       </div>
     </div>
   );

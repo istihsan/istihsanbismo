@@ -27,6 +27,15 @@ export function MernSheet({ copy }: MernSheetProps) {
         ]}
         className="vita__facts"
       />
+      <p className="archive-stamp" aria-hidden="true">
+        {mern.status}
+      </p>
+      {mern.sections.map((section) => (
+        <section key={section.heading}>
+          <ReSetText as="h3" text={section.heading} className="subhead" />
+          <ReSetText as="p" text={section.body} className="prose" />
+        </section>
+      ))}
     </article>
   );
 }

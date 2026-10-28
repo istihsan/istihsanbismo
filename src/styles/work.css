@@ -1,124 +1,20 @@
-/* Selected work cards, Coming Soon seal, and the short vita sheets. */
+/* Coming Soon seal and the short vita sheets. The register lives in evidence.css. */
 
 @layer components {
   .work-index,
   .vita {
     display: flex;
+    min-width: 0;
     flex-direction: column;
     gap: var(--space-block);
   }
 
-  .work-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .work-card {
-    display: flex;
-    min-height: 100%;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid var(--color-edge);
-    background: var(--paper-inset);
-    color: inherit;
-  }
-
-  .work-card__body {
-    display: flex;
-    min-width: 0;
-    flex: 1;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.25rem 1.25rem 1.375rem;
-  }
-
-  .work-card__note,
   .work-card__stamp {
     font-size: var(--text-label);
     font-weight: 650;
     letter-spacing: 0.14em;
     line-height: 1.4;
     text-transform: uppercase;
-  }
-
-  .work-card__note {
-    color: var(--color-oxblood);
-  }
-
-  .work-card__title {
-    font-size: var(--text-lead);
-    font-weight: 650;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    transition: color var(--duration-dossier) ease-out;
-  }
-
-  .work-card__copy {
-    max-width: 42ch;
-    font-size: var(--text-small);
-    line-height: 1.5;
-  }
-
-  .work-card__foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.35rem 1rem;
-    margin-top: auto;
-    padding-top: 0.75rem;
-  }
-
-  .work-card__exhibit {
-    color: var(--color-ink-muted);
-    font-size: var(--text-label);
-    font-weight: 650;
-    letter-spacing: 0.14em;
-    line-height: 1.4;
-    text-transform: uppercase;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .work-card__meta {
-    color: var(--color-ink-muted);
-    font-size: var(--text-small);
-    line-height: 1.45;
-  }
-
-  .work-card:hover .work-card__title {
-    color: var(--color-oxblood);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .work-card {
-      transition:
-        transform var(--duration-dossier) var(--ease-out),
-        box-shadow var(--duration-dossier) var(--ease-out);
-    }
-
-    .work-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 22px -16px rgb(28 18 12 / 0.55);
-    }
-  }
-
-  .work-card--soon {
-    background: var(--charcoal);
-    color: #efe9e0;
-    border-color: #2a2420;
-  }
-
-  .work-card--soon .work-card__copy,
-  .work-card--soon .work-card__exhibit {
-    color: #c4b8aa;
-  }
-
-  .work-card--soon .work-card__thumb {
-    order: -1;
-  }
-
-  .work-card--soon:hover .work-card__title {
-    color: #e39a8b;
   }
 
   .work-card__thumb,
@@ -149,7 +45,7 @@
   .work-card__thumb .work-card__stamp,
   .tycoon-sheet__seal .work-card__stamp {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     right: 0.75rem;
     bottom: 0.75rem;
     padding: 0.25rem 0.5rem;
@@ -157,9 +53,13 @@
     background: rgb(15 13 11 / 0.72);
   }
 
-  .work-card--soon .work-card__stamp,
   .tycoon-sheet__seal .work-card__stamp {
     color: #e39a8b;
+  }
+
+  .work-card__stamp--set {
+    transform: rotate(-6deg);
+    transform-origin: 100% 100%;
   }
 
   .tycoon-sheet__seal {
@@ -222,25 +122,7 @@
     column-gap: 1.25rem;
   }
 
-  @media (min-width: 768px) {
-    .work-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .work-grid > li:last-child {
-      grid-column: 1 / -1;
-    }
-  }
-
   @media (min-width: 1024px) {
-    .work-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .work-grid > li:last-child {
-      grid-column: auto;
-    }
-
     .skills-facts {
       max-width: 52rem;
     }

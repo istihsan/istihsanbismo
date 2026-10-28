@@ -8,6 +8,8 @@ import {
   sheetTotal,
   type RouteId,
 } from "../routes.ts";
+import { PageMotionProvider } from "../motion/pageMotion.ts";
+import { paperStyle } from "../paperShift.ts";
 import { ReSetText } from "./ReSetText.tsx";
 import { SheetPager } from "./SheetPager.tsx";
 
@@ -26,9 +28,21 @@ type SheetProps = {
   children: ReactNode;
 };
 
+/** Stop content motion on the way out. The sheet turn itself is not in this subtree. */
+function haltContentMotion(sheet: HTMLElement): void {
+  const scopes = sheet.querySelectorAll(".sheet__body, .pager");
+  scopes.forEach((scope) => {
+    const nodes = [scope, ...scope.querySelectorAll("*")];
+    nodes.forEach((node) => {
+      node.getAnimations().forEach((animation) => animation.cancel());
+    });
+  });
+}
+
 function sheetClass(active: boolean, exiting: boolean, direction: 1 | -1): string {
   const names = ["sheet", "on-paper"];
   if (active) names.push("sheet--active");
+  if (active && !exiting) names.push("sheet--live");
   if (exiting) {
     names.push("sheet--exiting");
     names.push(direction === 1 ? "sheet--forward" : "sheet--back");
@@ -57,7 +71,8 @@ export function Sheet({
     node.inert = locked;
     if (locked) node.setAttribute("inert", "");
     else node.removeAttribute("inert");
-  }, [active, turning]);
+    if (exiting) haltContentMotion(node);
+  }, [active, turning, exiting]);
 
   const headerId = headerRouteId(routeId);
   const number = sheetNumber(routeId);
@@ -69,9 +84,11 @@ export function Sheet({
       id={`sheet-${routeId}`}
       aria-labelledby={sheetHeadingId(routeId)}
       className={sheetClass(active, exiting, direction)}
+      style={paperStyle(routeId)}
     >
       <div className="sheet__leaf">
         <div className="sheet__face">
+          <span className="sheet__wear" aria-hidden="true" />
           <div className="sheet__head">
             {head ? (
               <ReSetText as="p" text={head.label} className="sheet__label" />
@@ -98,7 +115,11 @@ export function Sheet({
               <span className="sheet__ref" />
             )}
           </div>
-          <div className="sheet__body">{children}</div>
+          <div className="sheet__body">
+            <PageMotionProvider live={active && !exiting} epoch={language}>
+              {children}
+            </PageMotionProvider>
+          </div>
           <SheetPager
             copy={copy}
             routeId={routeId}

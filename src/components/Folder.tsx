@@ -14,6 +14,15 @@ export function Folder({ spine, turned, turning, reSetTick, children }: FolderPr
 
   useLayoutEffect(() => {
     const node = folderRef.current;
+    if (!node) return;
+    const spineNode = node.querySelector(".spine");
+    if (!spineNode) return;
+    if (turning) spineNode.setAttribute("inert", "");
+    else spineNode.removeAttribute("inert");
+  }, [turning]);
+
+  useLayoutEffect(() => {
+    const node = folderRef.current;
     if (!node || reSetTick === 0) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     node.classList.remove("is-re-set");

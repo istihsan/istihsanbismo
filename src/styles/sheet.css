@@ -40,6 +40,14 @@
     pointer-events: none;
   }
 
+  /* Content motion stops when the sheet leaves. The leaf turn is outside this subtree. */
+  .sheet--exiting .sheet__body *,
+  .sheet--exiting .sheet__body *::before,
+  .sheet--exiting .sheet__body *::after,
+  .sheet--exiting .pager * {
+    animation-play-state: paused !important;
+  }
+
   .sheet-stack[data-turning] .sheet--active:not(.sheet--exiting) {
     pointer-events: none;
   }
@@ -68,9 +76,6 @@
     flex-direction: column;
     padding: var(--sheet-pad-y) var(--sheet-pad-x) 0;
     background-color: var(--paper);
-    background-image: radial-gradient(rgb(88 66 44 / 0.045) 0.4px, transparent 0.55px);
-    background-size: 2.5px 2.5px;
-    box-shadow: inset 0 0 160px rgb(120 96 70 / 0.12);
     clip-path: var(--sheet-clip);
   }
 
@@ -78,14 +83,17 @@
   .sheet__face::before {
     content: "";
     position: absolute;
+    z-index: 0;
     top: 0;
     right: 0;
     width: var(--corner);
     height: var(--corner);
+    pointer-events: none;
     background: linear-gradient(
       to bottom left,
-      transparent 50%,
-      var(--paper-back) 50%,
+      transparent 49%,
+      rgb(90 70 52 / 0.2) 50%,
+      var(--paper-back) 56%,
       var(--paper-shade)
     );
   }

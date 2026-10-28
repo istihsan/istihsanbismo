@@ -1,0 +1,136 @@
+/* Physical marks. Decorations do not take clicks, focus, or selection. */
+
+@layer components {
+  .paperclip {
+    display: block;
+    width: 1.05rem;
+    height: 2.35rem;
+    color: #5c534b;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0.5px 1px 0 rgb(40 28 18 / 0.22));
+  }
+
+  .reg-mark {
+    display: block;
+    width: 0.65rem;
+    height: 0.65rem;
+    flex-shrink: 0;
+    border: 1px solid var(--color-edge-strong);
+    border-radius: 50%;
+    background:
+      linear-gradient(var(--color-edge-strong), var(--color-edge-strong)) center / 1px 100% no-repeat,
+      linear-gradient(var(--color-edge-strong), var(--color-edge-strong)) center / 100% 1px no-repeat;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .ink-circle,
+  .ink-rule {
+    color: var(--color-oxblood);
+    pointer-events: none;
+    user-select: none;
+    overflow: visible;
+  }
+
+  .ink-circle {
+    position: absolute;
+    top: -0.32rem;
+    right: -0.55rem;
+    bottom: auto;
+    left: -0.55rem;
+    width: calc(100% + 1.1rem);
+    height: calc(100% + 0.64rem);
+  }
+
+  .ink-rule {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 0.5rem;
+  }
+
+  .fact-list__row--marked,
+  .layer--marked .layer__bar {
+    position: relative;
+  }
+
+  .archive-stamp {
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
+    align-self: flex-start;
+    margin-top: 0.85rem;
+    padding: 0.2rem 0.45rem;
+    border: 1.5px solid var(--color-oxblood);
+    color: var(--color-oxblood);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+    transform: rotate(-6deg);
+    transform-origin: left center;
+  }
+
+  .vita-row--clipped {
+    position: relative;
+    padding-top: 1.65rem;
+  }
+
+  .vita-row__clip,
+  .closing__clip {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .vita-row__clip {
+    top: -1.15rem;
+    left: 0.85rem;
+    transform: rotate(-14deg);
+  }
+
+  .closing__facts-wrap {
+    position: relative;
+  }
+
+  .closing__clip {
+    top: -0.48rem;
+    left: -0.34rem;
+    transform: rotate(-8deg);
+  }
+
+  .cover__clip,
+  .cover__marks {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .cover__clip {
+    position: absolute;
+    z-index: 4;
+    top: -0.7rem;
+    left: 0.7rem;
+    transform: rotate(-16deg);
+  }
+
+  .portrait__foot {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.45rem;
+  }
+
+  .cover__marks {
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.35rem;
+  }
+}

@@ -13,7 +13,9 @@ export function TycoonSheet({ copy }: TycoonSheetProps) {
     <article className="vita tycoon-sheet">
       <div className="tycoon-sheet__seal">
         <span className="tycoon-sheet__thumb" aria-hidden="true" />
-        <ReSetText text={tycoon.stamp} className="work-card__stamp" />
+        <span className="work-card__stamp work-card__stamp--set">
+          <ReSetText text={tycoon.stamp} />
+        </span>
       </div>
       <ReSetText
         as="h2"
@@ -23,6 +25,12 @@ export function TycoonSheet({ copy }: TycoonSheetProps) {
         className="sheet-title"
       />
       <ReSetText as="p" text={tycoon.description} className="prose prose--lead" />
+      {tycoon.sections.map((section) => (
+        <section key={section.heading}>
+          <ReSetText as="h3" text={section.heading} className="subhead" />
+          <ReSetText as="p" text={section.body} className="prose" />
+        </section>
+      ))}
     </article>
   );
 }

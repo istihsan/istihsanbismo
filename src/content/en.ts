@@ -31,9 +31,9 @@ export const en: PageCopy = {
       summary: "Enterprise operations dashboard",
     },
     "mern-website": {
-      label: "Archived MERN website",
-      short: "MERN",
-      summary: "Full-stack, archived",
+      label: "Online Printing Service & Dashboard",
+      short: "Printing",
+      summary: "Archived full-stack record",
     },
     "tycoon-game": {
       label: "Web-Based Tycoon Game",
@@ -80,6 +80,11 @@ export const en: PageCopy = {
     openFile: "Open the file",
     portraitLabel: "Portrait",
     accessMark: "Restricted",
+    personnelDossier: "PERSONNEL DOSSIER",
+    fileReference: "FILE REFERENCE",
+    classification: "CLASSIFICATION",
+    skipIntro: "Skip intro",
+    replayOpening: "Replay opening",
   },
   folio: {
     caseTitle: "Transjakarta App Dashboard",
@@ -88,14 +93,29 @@ export const en: PageCopy = {
       { label: "My role", value: "Sole frontend developer" },
       { label: "Stack", value: "React, TypeScript, TanStack Query" },
     ],
-    contextHeading: "Context",
+    contextHeading: "Assignment briefing",
     context:
-      "The staff dashboard turns passenger activity into work someone can act on. It sits between the passenger app and field operations and does not replace either one. Laporan (reports) is one domain inside it, with tickets, engagement, and loyalty.",
+      "An operational platform supporting teams behind Jakarta's public transportation services. My assignment was the frontend of the staff dashboard: interfaces that turn operational data into workflows staff can act on. The dashboard sits between the passenger app and field operations and does not replace either one.",
     contributionHeading: "My contribution",
     contribution:
-      "I was the sole developer responsible for the Transjakarta App Dashboard frontend.",
+      "I was the sole frontend developer responsible for the Transjakarta App Dashboard.",
     scope:
       "I built the staff-facing interfaces across its domains, from data tables to the workflow screens built on them. My scope was the frontend; the wider product, backend, and design are not claimed here.",
+    footprintHeading: "Operational footprint",
+    footprint: [
+      { label: "Laporan", value: "Reports. One domain of the staff dashboard." },
+      { label: "Tickets", value: "One domain of the staff dashboard." },
+      { label: "Engagement", value: "One domain of the staff dashboard." },
+      { label: "Loyalty", value: "One domain of the staff dashboard." },
+      {
+        label: "Placement",
+        value: "Between the passenger app and field operations. Neither is replaced.",
+      },
+      {
+        label: "Access",
+        value: "Role-based views, a frontend concern across all four domains.",
+      },
+    ],
     domainsHeading: "Selected domains",
     roleViews: {
       name: "Role-based views",

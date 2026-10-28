@@ -32,7 +32,7 @@
   .diagram__node--built {
     border: 1px solid var(--color-ink);
     background: var(--paper);
-    box-shadow: 4px 4px 0 var(--oxblood-edge);
+    box-shadow: 3px 5px 12px -6px rgb(80 32 24 / 0.4);
   }
 
   /* Connector line from the previous node. */
@@ -192,6 +192,137 @@
       justify-content: center;
       padding-inline: 0.125rem;
       text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .diagram:not(.diagram--still) .diagram__node--adjacent:first-child {
+      animation: diagram-in 0.28s var(--ease-out) both;
+    }
+
+    .diagram:not(.diagram--still) .diagram__flow > .diagram__node:nth-child(2)::before,
+    .diagram:not(.diagram--still) .diagram__flow > .diagram__node:nth-child(3)::before {
+      transform-origin: top center;
+      animation: diagram-draw-y 0.22s var(--ease-out) both;
+    }
+
+    .diagram:not(.diagram--still) .diagram__flow > .diagram__node:nth-child(2)::before {
+      animation-delay: 0.2s;
+    }
+
+    .diagram:not(.diagram--still) .diagram__node--built {
+      animation: diagram-box 0.28s var(--ease-out) 0.34s both;
+    }
+
+    .diagram:not(.diagram--still) .diagram__node--built::after,
+    .diagram:not(.diagram--still) .diagram__edge {
+      animation: diagram-fade 0.18s var(--ease-out) 0.28s both;
+    }
+
+    .diagram:not(.diagram--still) .diagram__node--built > .diagram__tag,
+    .diagram:not(.diagram--still) .diagram__node--built > .diagram__title,
+    .diagram:not(.diagram--still) .diagram__node--built > .diagram__note {
+      animation: diagram-in 0.24s var(--ease-out) 0.4s both;
+    }
+
+    .diagram:not(.diagram--still) .diagram__domains,
+    .diagram:not(.diagram--still) .diagram__layers {
+      animation: diagram-in 0.24s var(--ease-out) 0.56s both;
+    }
+
+    .diagram:not(.diagram--still) .diagram__flow > .diagram__node:nth-child(3)::before {
+      animation-delay: 0.66s;
+    }
+
+    .diagram:not(.diagram--still) .diagram__node--adjacent:last-child {
+      animation: diagram-rule 0.24s var(--ease-out) 0.78s both;
+    }
+
+    .diagram:not(.diagram--still) .diagram__node--adjacent:last-child > * {
+      animation: diagram-in 0.22s var(--ease-out) 0.82s both;
+    }
+
+    @media (min-width: 1280px) {
+      .diagram:not(.diagram--still) .diagram__flow > .diagram__node:nth-child(2)::before,
+      .diagram:not(.diagram--still) .diagram__flow > .diagram__node:nth-child(3)::before {
+        transform-origin: left center;
+        animation-name: diagram-draw-x;
+      }
+    }
+
+    .sheet:not(.sheet--live) .diagram,
+    .sheet:not(.sheet--live) .diagram::before,
+    .sheet:not(.sheet--live) .diagram::after,
+    .sheet:not(.sheet--live) .diagram *,
+    .sheet:not(.sheet--live) .diagram *::before,
+    .sheet:not(.sheet--live) .diagram *::after {
+      animation-play-state: paused !important;
+    }
+  }
+
+  @keyframes diagram-in {
+    from {
+      opacity: 1;
+      transform: translateY(4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes diagram-fade {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes diagram-draw-y {
+    from {
+      transform: scaleY(0);
+    }
+
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes diagram-draw-x {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes diagram-box {
+    from {
+      border-color: transparent;
+      background-color: transparent;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    to {
+      border-color: var(--color-ink);
+      background-color: var(--paper);
+      box-shadow: 3px 5px 12px -6px rgb(80 32 24 / 0.4);
+    }
+  }
+
+  @keyframes diagram-rule {
+    from {
+      border-color: transparent;
+    }
+
+    to {
+      border-color: var(--color-edge-strong);
     }
   }
 }

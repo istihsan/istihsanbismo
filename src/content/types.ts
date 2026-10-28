@@ -25,6 +25,11 @@ export type WorkCardCopy = {
   note: string;
 };
 
+export type RecordSection = {
+  heading: string;
+  body: string;
+};
+
 export type SkillGroup = {
   label: string;
   items: string;
@@ -53,6 +58,11 @@ export type PageCopy = {
     openFile: string;
     portraitLabel: string;
     accessMark: string;
+    personnelDossier: string;
+    fileReference: string;
+    classification: string;
+    skipIntro: string;
+    replayOpening: string;
   };
   folio: {
     caseTitle: string;
@@ -62,6 +72,8 @@ export type PageCopy = {
     contributionHeading: string;
     contribution: string;
     scope: string;
+    footprintHeading: string;
+    footprint: Fact[];
     domainsHeading: string;
     roleViews: DiagramDomain;
     challengesHeading: string;
@@ -108,6 +120,7 @@ export type PageCopy = {
   };
   work: {
     exhibit: string;
+    open: string;
     transjakarta: WorkCardCopy;
     mern: WorkCardCopy;
     tycoon: {
@@ -124,11 +137,13 @@ export type PageCopy = {
     stack: string;
     statusLabel: string;
     status: string;
+    sections: RecordSection[];
   };
   tycoon: {
     title: string;
     description: string;
     stamp: string;
+    sections: RecordSection[];
   };
   experience: {
     title: string;

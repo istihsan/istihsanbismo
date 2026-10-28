@@ -35,6 +35,8 @@ export const SPINE_ORDER = [
   "work",
   "engineering",
   "experience",
+  "education",
+  "skills",
   "contact",
 ] as const satisfies readonly RouteId[];
 

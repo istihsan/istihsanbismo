@@ -8,11 +8,10 @@ import { ReSetText } from "./ReSetText.tsx";
 type FolioProps = {
   folio: PageCopy["folio"];
   figure: PageCopy["figure"];
+  classification: string;
 };
 
-export function Folio({ folio, figure }: FolioProps) {
-  const domains = [...figure.domains, folio.roleViews];
-
+export function Folio({ folio, figure, classification }: FolioProps) {
   return (
     <article className="folio">
       <div className="folio__opening">
@@ -28,7 +27,7 @@ export function Folio({ folio, figure }: FolioProps) {
             <ReSetText as="h3" text={folio.contextHeading} className="subhead" />
             <ReSetText as="p" text={folio.context} className="prose" />
           </div>
-          <FactList facts={folio.facts} className="folio__facts" />
+          <FactList facts={folio.facts} className="folio__facts" markedIndex={1} />
         </div>
 
         <div className="folio__aside">
@@ -37,26 +36,12 @@ export function Folio({ folio, figure }: FolioProps) {
             <ReSetText as="p" text={folio.contribution} className="prose prose--strong" />
             <ReSetText as="p" text={folio.scope} className="prose prose--muted" />
           </div>
-          <div className="folio__block">
-            <ReSetText as="h3" text={folio.domainsHeading} className="subhead" />
-            <ul className="domain-list">
-              {domains.map((domain, position) => (
-                <li
-                  key={position}
-                  className={`domain-list__item${domain === folio.roleViews ? " domain-list__item--across" : ""}`}
-                >
-                  <ReSetText text={domain.name} className="domain-list__name" />
-                  {domain.gloss ? (
-                    <ReSetText
-                      text={`(${domain.gloss})`}
-                      className="domain-list__gloss"
-                    />
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
+      </div>
+
+      <div className="folio__block">
+        <ReSetText as="h3" text={folio.footprintHeading} className="subhead" />
+        <FactList facts={folio.footprint} className="folio__footprint" />
       </div>
 
       <CaseDiagram figure={figure} />
@@ -81,6 +66,9 @@ export function Folio({ folio, figure }: FolioProps) {
         <div className="confidential__body">
           <ReSetText as="h3" text={folio.confidentialityHeading} className="subhead" />
           <ReSetText as="p" text={folio.confidentiality} className="prose" />
+          <p className="archive-stamp" aria-hidden="true">
+            {classification}
+          </p>
         </div>
       </div>
     </article>

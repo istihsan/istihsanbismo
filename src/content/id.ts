@@ -31,9 +31,9 @@ export const id: PageCopy = {
       summary: "Dashboard operasional enterprise",
     },
     "mern-website": {
-      label: "Situs MERN yang diarsipkan",
-      short: "MERN",
-      summary: "Full-stack, diarsipkan",
+      label: "Layanan Cetak Online & Dasbor",
+      short: "Cetak",
+      summary: "Full-stack yang diarsipkan",
     },
     "tycoon-game": {
       label: "Game Tycoon Berbasis Web",
@@ -80,6 +80,11 @@ export const id: PageCopy = {
     openFile: "Buka berkas",
     portraitLabel: "Potret",
     accessMark: "Terbatas",
+    personnelDossier: "Berkas personel",
+    fileReference: "Referensi berkas",
+    classification: "Klasifikasi",
+    skipIntro: "Lewati pembuka",
+    replayOpening: "Putar ulang pembuka",
   },
   folio: {
     caseTitle: "Dashboard Aplikasi\u00A0Transjakarta",
@@ -88,14 +93,30 @@ export const id: PageCopy = {
       { label: "Peran saya", value: "Satu-satunya developer frontend" },
       { label: "Stack", value: "React, TypeScript, TanStack Query" },
     ],
-    contextHeading: "Konteks",
+    contextHeading: "Ringkasan penugasan",
     context:
-      "Dashboard ini mengubah aktivitas penumpang menjadi pekerjaan yang bisa ditindaklanjuti staf. Posisinya di antara aplikasi penumpang dan operasional lapangan, bukan pengganti keduanya. Laporan adalah salah satu bagiannya, di samping tiket, engagement, dan loyalitas.",
+      "Sebuah platform operasional yang mendukung tim di balik layanan transportasi publik Jakarta. Penugasan saya adalah frontend dashboard staf: antarmuka yang mengubah data operasional menjadi alur kerja yang bisa ditindaklanjuti. Dashboard ini berada di antara aplikasi penumpang dan operasional lapangan, dan tidak menggantikan keduanya.",
     contributionHeading: "Kontribusi saya",
     contribution:
-      "Saya satu-satunya developer yang bertanggung jawab atas frontend Dashboard Aplikasi\u00A0Transjakarta.",
+      "Saya satu-satunya developer frontend yang bertanggung jawab atas Dashboard Aplikasi Transjakarta.",
     scope:
       "Saya membangun antarmuka untuk staf di seluruh domainnya, dari tabel data sampai layar alur kerja yang dibangun di atasnya. Lingkup saya adalah frontend; produk secara keseluruhan, backend, dan desainnya tidak saya klaim di sini.",
+    footprintHeading: "Jangkauan operasional",
+    footprint: [
+      { label: "Laporan", value: "Satu domain dashboard staf." },
+      { label: "Tiket", value: "Satu domain dashboard staf." },
+      { label: "Engagement", value: "Satu domain dashboard staf." },
+      { label: "Loyalitas", value: "Satu domain dashboard staf." },
+      {
+        label: "Posisi",
+        value:
+          "Di antara aplikasi penumpang dan operasional lapangan. Keduanya tidak digantikan.",
+      },
+      {
+        label: "Akses",
+        value: "Tampilan role-based, urusan frontend di keempat domain.",
+      },
+    ],
     domainsHeading: "Domain terpilih",
     roleViews: {
       name: "Tampilan role-based",

@@ -1,0 +1,207 @@
+/* Vertical evidence register and the flagship schematic. */
+
+@layer components {
+  .evidence {
+    position: relative;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .evidence::before {
+    content: "";
+    position: absolute;
+    top: 1.35rem;
+    bottom: 1.35rem;
+    left: 0;
+    width: 1px;
+    background: var(--color-edge-strong);
+    pointer-events: none;
+  }
+
+  .evidence__item {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 4.25rem minmax(0, 1fr);
+    align-items: start;
+    column-gap: 0.9rem;
+    padding: 1.35rem 0 1.45rem 0.85rem;
+    border-bottom: 1px solid var(--color-edge);
+  }
+
+  .evidence__item--flagship {
+    padding-block: 1.8rem 1.95rem;
+  }
+
+  .evidence__link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* The title is the link name. This layer makes the whole row the hit target. */
+  .evidence__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .evidence__no {
+    grid-row: 1 / -1;
+    grid-column: 1;
+    min-width: 0;
+  }
+
+  .evidence__index {
+    display: block;
+    color: var(--color-oxblood);
+    font-size: var(--text-small);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .evidence__exhibit {
+    display: block;
+    max-width: 100%;
+    margin-top: 0.2rem;
+    color: var(--color-ink-muted);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .evidence__copy {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .evidence__headline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.35rem 1.25rem;
+  }
+
+  .evidence__title {
+    margin: 0;
+    min-width: min(100%, 14rem);
+    font-size: var(--text-lead);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    transition: color 140ms var(--ease-out);
+  }
+
+  .evidence__item--flagship .evidence__title {
+    font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .evidence__status {
+    margin: 0;
+    color: var(--color-oxblood);
+    font-size: var(--text-label);
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    line-height: 1.35;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .evidence__detail,
+  .evidence__meta {
+    margin: 0.4rem 0 0;
+    max-width: 66ch;
+  }
+
+  .evidence__detail {
+    font-size: var(--text-small);
+    line-height: 1.5;
+  }
+
+  .evidence__item--flagship .evidence__detail {
+    font-size: var(--text-body);
+  }
+
+  .evidence__meta {
+    color: var(--color-ink-muted);
+    font-size: var(--text-small);
+    line-height: 1.45;
+  }
+
+  .evidence__open {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.85rem;
+    font-size: var(--text-small);
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: var(--color-oxblood);
+    text-underline-offset: 0.22em;
+  }
+
+  .evidence__item:hover .evidence__title {
+    color: var(--color-oxblood);
+  }
+
+  .tycoon-sheet__seal.evidence__seal {
+    display: block;
+    height: 7.25rem;
+    min-width: 0;
+    margin-top: 0.9rem;
+    pointer-events: none;
+  }
+
+  .case-strip {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem 0.75rem;
+    margin-top: 1.15rem;
+    padding-top: 0.85rem;
+  }
+
+  .case-strip__node {
+    min-width: 0;
+    font-size: var(--text-label);
+    line-height: 1.35;
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+
+  .case-strip__node--built {
+    color: var(--color-oxblood);
+    font-weight: 650;
+  }
+
+  @media (min-width: 840px) {
+    .evidence__item {
+      column-gap: 1.25rem;
+      padding-left: 1rem;
+    }
+
+    .evidence__item--sealed {
+      grid-template-columns: 4.25rem minmax(0, 1fr) minmax(12.5rem, 16.5rem);
+    }
+
+    .evidence__item--sealed .evidence__seal {
+      grid-column: 3;
+      grid-row: 1 / -1;
+      align-self: stretch;
+      height: auto;
+      min-height: 8.75rem;
+      margin-top: 0;
+    }
+  }
+
+}

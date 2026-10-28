@@ -1,5 +1,6 @@
 import type { PageCopy } from "../content/index.ts";
 import type { DiagramNode as DiagramNodeCopy } from "../content/types.ts";
+import { useContentHeld } from "../motion/pageMotion.ts";
 import { FigureCaption } from "./FigureCaption.tsx";
 import { ReSetText } from "./ReSetText.tsx";
 
@@ -22,8 +23,10 @@ function NodeHead({ node }: NodeHeadProps) {
 }
 
 export function CaseDiagram({ figure }: CaseDiagramProps) {
+  const held = useContentHeld();
+
   return (
-    <figure className="diagram">
+    <figure className={held ? "diagram diagram--still" : "diagram"}>
       <div className="plate">
         {/* The figcaption states this for assistive technology. */}
         <p className="plate__tag" aria-hidden="true">

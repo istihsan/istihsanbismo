@@ -43,7 +43,7 @@ export function Notes({ notes }: NotesProps) {
       <section className="notes__section">
         <ReSetText as="h3" text={sections.featureArchitecture} className="subhead" />
         <EntryList entries={[principles[0]]} titleAs="h4" />
-        <LayerDiagram figure={notes.layerFigure} layers={layers} />
+        <LayerDiagram figure={notes.layerFigure} layers={layers} markedIndex={3} />
       </section>
 
       <section className="notes__section">

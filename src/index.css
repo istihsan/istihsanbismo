@@ -1,5 +1,8 @@
 @import "./styles/folder.css";
 @import "./styles/sheet.css";
+@import "./styles/paper.css";
+@import "./styles/archive.css";
+@import "./styles/evidence.css";
 @import "./styles/cover.css";
 @import "./styles/window.css";
 @import "./styles/folio.css";
@@ -7,6 +10,8 @@
 @import "./styles/notes.css";
 @import "./styles/work.css";
 @import "./styles/pocket.css";
+@import "./styles/opening.css";
+@import "./styles/life.css";
 @import "./styles/media.css";
 
 @tailwind base;
@@ -52,7 +57,7 @@
 
   /* Motion. */
   --duration-dossier: 160ms;
-  --duration-sheet: 560ms;
+  --duration-sheet: 900ms;
   --duration-re-set: 560ms;
   --duration-pulse: 2.8s;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -228,6 +233,12 @@ li {
   initial-value: 0;
 }
 
+@property --scratch {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
 @property --sheet-dir {
   syntax: "<number>";
   inherits: true;
@@ -321,5 +332,20 @@ li {
   .sheet--exiting .sheet__shade,
   .sheet--exiting .sheet__spec {
     clip-path: var(--sheet-clip);
+  }
+
+  /* animation: none and opacity: 1 above would freeze a mounted ink bar. */
+  .cover__redact,
+  .opening,
+  .opening-skip {
+    display: none;
+  }
+
+  #root .portrait__stamp {
+    transform: rotate(-8deg);
+  }
+
+  #root .work-card__stamp--set {
+    transform: rotate(-6deg);
   }
 }

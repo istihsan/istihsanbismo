@@ -4,6 +4,7 @@ import { Closing } from "./components/Closing.tsx";
 import { Cover } from "./components/Cover.tsx";
 import { Folder } from "./components/Folder.tsx";
 import { Folio } from "./components/Folio.tsx";
+import { SealedFolder } from "./components/SealedFolder.tsx";
 import { Notes } from "./components/Notes.tsx";
 import { Pocket } from "./components/Pocket.tsx";
 import { Sheet } from "./components/Sheet.tsx";
@@ -21,19 +22,54 @@ import { MissingSheet } from "./pages/MissingSheet.tsx";
 import { Skills } from "./pages/Skills.tsx";
 import { TycoonSheet } from "./pages/TycoonSheet.tsx";
 import { WorkIndex } from "./pages/WorkIndex.tsx";
+import { useQuietMotion } from "./motion/quiet.ts";
+import { consumeOpening, openingShouldPlay } from "./openingSeen.ts";
 import { ReSetContext } from "./reSet.ts";
 import { parseLocation, sheetHeadingId, swapLanguage, type RouteId } from "./routes.ts";
 import { syncSheetTurn } from "./sheetTurn.ts";
 import { useSheetTurn } from "./useSheetTurn.ts";
 
-function sheetBody(routeId: RouteId, copy: PageCopy, language: Language): ReactNode {
+type CoverIntro = {
+  redact: boolean;
+  scratch: boolean;
+  redactKey: number;
+  showReplay: boolean;
+  opened: boolean;
+  onReplay: () => void;
+  onRedactDone: () => void;
+};
+
+function sheetBody(
+  routeId: RouteId,
+  copy: PageCopy,
+  language: Language,
+  intro: CoverIntro,
+): ReactNode {
   switch (routeId) {
     case "cover":
-      return <Cover copy={copy} language={language} />;
+      return (
+        <Cover
+          copy={copy}
+          language={language}
+          redact={intro.redact}
+          scratch={intro.scratch}
+          redactKey={intro.redactKey}
+          showReplay={intro.showReplay}
+          opened={intro.opened}
+          onReplay={intro.onReplay}
+          onRedactDone={intro.onRedactDone}
+        />
+      );
     case "work":
       return <WorkIndex copy={copy} language={language} />;
     case "transjakarta":
-      return <Folio folio={copy.folio} figure={copy.figure} />;
+      return (
+        <Folio
+          folio={copy.folio}
+          figure={copy.figure}
+          classification={copy.work.transjakarta.note}
+        />
+      );
     case "mern-website":
       return <MernSheet copy={copy} />;
     case "tycoon-game":
@@ -146,15 +182,88 @@ function DossierChrome({
   direction: 1 | -1;
   onSelectLanguage: (next: Language) => void;
 }) {
+  const quiet = useQuietMotion();
+  const [replayCount, setReplayCount] = useState(0);
+  const [overlay, setOverlay] = useState(() => openingShouldPlay(routeId));
+  const [redact, setRedact] = useState(() => openingShouldPlay(routeId));
+  const [scratch, setScratch] = useState(false);
+  const replayFocus = useRef(false);
+  const languageSeen = useRef(language);
+  const onCover = routeId === "cover";
+
   useEffect(() => {
     document.title = copy.documentTitle;
   }, [copy.documentTitle]);
+
+  useLayoutEffect(() => {
+    if (routeId === "cover") return;
+    consumeOpening();
+    setOverlay(false);
+    setRedact(false);
+    setScratch(false);
+  }, [routeId]);
+
+  useLayoutEffect(() => {
+    if (languageSeen.current === language) return;
+    languageSeen.current = language;
+    consumeOpening();
+    setOverlay(false);
+    setRedact(false);
+    setScratch(false);
+  }, [language]);
+
+  function finishOverlay() {
+    consumeOpening();
+    setOverlay(false);
+  }
+
+  function skipIntro() {
+    consumeOpening();
+    setOverlay(false);
+    setRedact(false);
+    setScratch(false);
+    document.getElementById(sheetHeadingId("cover"))?.focus({ preventScroll: true });
+  }
+
+  function replayOpening() {
+    replayFocus.current = true;
+    setReplayCount((count) => count + 1);
+    setOverlay(true);
+    setRedact(true);
+    setScratch(false);
+  }
+
+  useLayoutEffect(() => {
+    if (!replayFocus.current || !overlay || !onCover) return;
+    replayFocus.current = false;
+    document.querySelector<HTMLButtonElement>(".opening-skip")?.focus({ preventScroll: true });
+  }, [overlay, onCover, replayCount]);
+
+  const showReplay = !quiet && onCover && !overlay && !redact;
+  const intro: CoverIntro = {
+    redact: redact && onCover,
+    scratch: scratch && onCover,
+    redactKey: replayCount,
+    showReplay,
+    opened: onCover && (!overlay || scratch),
+    onReplay: replayOpening,
+    onRedactDone: () => setRedact(false),
+  };
 
   const sheets: RouteId[] =
     exiting && exiting !== routeId ? [exiting, routeId] : [routeId];
 
   return (
     <ReSetContext.Provider value={reSetTick > 0}>
+      {overlay && onCover ? (
+        <SealedFolder
+          key={replayCount}
+          copy={copy}
+          onDone={finishOverlay}
+          onSkip={skipIntro}
+          onReveal={() => setScratch(true)}
+        />
+      ) : null}
       <Folder
         turned={turned}
         turning={turning}
@@ -185,7 +294,7 @@ function DossierChrome({
             }
             after={id === "contact" ? <Pocket copy={copy} /> : undefined}
           >
-            {sheetBody(id, copy, language)}
+            {sheetBody(id, copy, language, intro)}
           </Sheet>
         ))}
       </Folder>
